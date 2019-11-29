@@ -10,7 +10,7 @@ import java.net.URI
 
 class BetterSocketPlugin() : MethodCallHandler {
     private var betterWebSocketClient: BetterWebSocketClient? = null
-    private val queuingEventSink: QueuingEventSink = QueuingEventSink()
+    val queuingEventSink: QueuingEventSink = QueuingEventSink()
 
     companion object {
         @JvmStatic
@@ -135,7 +135,7 @@ class BetterSocketPlugin() : MethodCallHandler {
 
 class BetterSocketPluginOne() : MethodCallHandler {
     private var betterWebSocketClient: BetterWebSocketClient? = null
-    private val queuingEventSink: QueuingEventSink = QueuingEventSink()
+    val queuingEventSink: QueuingEventSink = QueuingEventSink()
 
 
     override fun onMethodCall(call: MethodCall, result: Result) {
@@ -181,7 +181,7 @@ class BetterSocketPluginOne() : MethodCallHandler {
 
 class BetterSocketPluginTwo() : MethodCallHandler {
     private var betterWebSocketClient: BetterWebSocketClient? = null
-    private val queuingEventSink: QueuingEventSink = QueuingEventSink()
+    val queuingEventSink: QueuingEventSink = QueuingEventSink()
 
 
     override fun onMethodCall(call: MethodCall, result: Result) {
@@ -227,7 +227,7 @@ class BetterSocketPluginTwo() : MethodCallHandler {
 
 class BetterSocketPluginThree() : MethodCallHandler {
     private var betterWebSocketClient: BetterWebSocketClient? = null
-    private val queuingEventSink: QueuingEventSink = QueuingEventSink()
+    val queuingEventSink: QueuingEventSink = QueuingEventSink()
 
 
     override fun onMethodCall(call: MethodCall, result: Result) {
@@ -273,7 +273,7 @@ class BetterSocketPluginThree() : MethodCallHandler {
 
 class BetterSocketPluginFour() : MethodCallHandler {
     private var betterWebSocketClient: BetterWebSocketClient? = null
-    private val queuingEventSink: QueuingEventSink = QueuingEventSink()
+    val queuingEventSink: QueuingEventSink = QueuingEventSink()
 
 
     override fun onMethodCall(call: MethodCall, result: Result) {
