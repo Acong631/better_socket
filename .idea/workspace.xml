@@ -6,14 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c89bb0d-1ae0-4b17-81d1-fe11cdaab427" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/kinsomy/better_socket/BetterSocketPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/kinsomy/better_socket/BetterSocketPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/better_socket.iml" beforeDir="false" afterPath="$PROJECT_DIR$/better_socket.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/better_socket.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/better_socket.dart" afterDir="false" />
-    </list>
+    <list default="true" id="7c89bb0d-1ae0-4b17-81d1-fe11cdaab427" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -147,10 +140,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-412" />
-    <option name="y" value="392" />
-    <option name="width" value="2560" />
-    <option name="height" value="877" />
+    <option name="x" value="-124" />
+    <option name="y" value="358" />
+    <option name="width" value="2102" />
+    <option name="height" value="851" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -275,7 +268,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-412" y="392" width="2560" height="877" extended-state="0" />
+    <frame x="-550" y="392" width="2560" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18427323" />
