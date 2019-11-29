@@ -56,7 +56,7 @@ class BetterSocketPlugin() : MethodCallHandler {
                     plugin2.queuingEventSink.setDelegate(sink)
                 }
                 override fun onCancel(p0: Any?) {
-                    plugin2queuingEventSink.setDelegate(null)
+                    plugin2.queuingEventSink.setDelegate(null)
                 }
             })
 
