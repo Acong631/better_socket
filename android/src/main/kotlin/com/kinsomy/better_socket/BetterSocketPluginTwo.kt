@@ -8,20 +8,20 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 import java.net.URI
 
-class BetterSocketPlugin() : MethodCallHandler {
+class BetterSocketPluginTwo() : MethodCallHandler {
     private var betterWebSocketClient: BetterWebSocketClient? = null
     private val queuingEventSink: QueuingEventSink = QueuingEventSink()
 
     companion object {
         @JvmStatic
         fun registerWith(registrar: Registrar) {
-            val plugin = BetterSocketPlugin()
+            val plugin = BetterSocketPluginTwo()
 
-            val channel = MethodChannel(registrar.messenger(), "better_socket0")
+            val channel = MethodChannel(registrar.messenger(), "better_socket2")
             channel.setMethodCallHandler(plugin)
 
             //注册WebSocket Flutter回调
-            EventChannel(registrar.messenger(), "better_socket0/event").setStreamHandler(object : EventChannel.StreamHandler {
+            EventChannel(registrar.messenger(), "better_socket2/event").setStreamHandler(object : EventChannel.StreamHandler {
                 override fun onListen(p0: Any?, sink: EventChannel.EventSink?) {
                     plugin.queuingEventSink.setDelegate(sink)
                 }
