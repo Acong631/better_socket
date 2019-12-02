@@ -11,13 +11,17 @@
 @implementation BetterSocketPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     
-    FlutterMethodChannel* channel = [FlutterMethodChannel
-                                     methodChannelWithName:@"better_socket"
-                                     binaryMessenger:[registrar messenger]];
-    BetterSocketPlugin* instance = [[BetterSocketPlugin alloc] init];
-    [registrar addMethodCallDelegate:instance channel:channel];
-    FlutterEventChannel* eventChannel = [FlutterEventChannel eventChannelWithName:@"better_socket/event" binaryMessenger:[registrar messenger]];
-    [eventChannel setStreamHandler:instance];
+    int count = 20;
+    for (int i = 0; i<count; i++) {
+        FlutterMethodChannel* channel = [FlutterMethodChannel
+                                         methodChannelWithName:[NSString stringWithFormat:@"better_socket%d",i]
+                                         binaryMessenger:[registrar messenger]];
+        BetterSocketPlugin* instance = [[BetterSocketPlugin alloc] init];
+        [registrar addMethodCallDelegate:instance channel:channel];
+        
+        FlutterEventChannel* eventChannel = [FlutterEventChannel eventChannelWithName:[NSString stringWithFormat:@"better_socket/event%d",i] binaryMessenger:[registrar messenger]];
+        [eventChannel setStreamHandler:instance];
+    }
 }
 
 

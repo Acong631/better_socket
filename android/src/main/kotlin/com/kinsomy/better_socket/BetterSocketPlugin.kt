@@ -16,8 +16,8 @@ class BetterSocketPlugin() : MethodCallHandler {
         @JvmStatic
         fun registerWith(registrar: Registrar) {
 
-            var count = 20;
-            for (index in 1..count){
+            var count = 19;
+            for (index in 0..count){
                 val plugin = BetterSocketPlugin()
                 val channel = MethodChannel(registrar.messenger(), "better_socket" + index.toString())
                 channel.setMethodCallHandler(plugin)
