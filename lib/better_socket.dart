@@ -7,7 +7,7 @@ class BetterSocket {
   final String channelID;
   final MethodChannel channel;
   BetterSocket(this.channelID, this.channel);
-  BetterSocket initSocket(String id){
+  static BetterSocket initSocket(String id){
     MethodChannel _channel =  MethodChannel('better_socket' + id);
     BetterSocket socket = BetterSocket(id, _channel);
  
@@ -42,7 +42,7 @@ class BetterSocket {
       Function onMessage,
       Function onError,
       Function onClose}) {
-    EventChannel eventChannel = EventChannel("better_socket0/event");
+    EventChannel eventChannel = EventChannel("better_socket/event" + channelID);
     eventChannel.receiveBroadcastStream().listen((data) {
       print(data);
       var event = data["event"];
