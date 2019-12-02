@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:better_socket/better_socket.dart';
+
+// import '../lib/better_socket.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('better_socket');
@@ -15,7 +16,7 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await BetterSocket.platformVersion, '42');
-  });
+  // test('getPlatformVersion', () async {
+  //   expect(await BetterSocket.platformVersion, '42');
+  // });
 }

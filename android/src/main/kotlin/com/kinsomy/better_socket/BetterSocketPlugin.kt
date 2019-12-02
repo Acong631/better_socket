@@ -15,79 +15,26 @@ class BetterSocketPlugin() : MethodCallHandler {
     companion object {
         @JvmStatic
         fun registerWith(registrar: Registrar) {
-            val plugin = BetterSocketPlugin()
 
-            val channel = MethodChannel(registrar.messenger(), "better_socket0")
-            channel.setMethodCallHandler(plugin)
+            var count = 20;
+            for (index in 1..count){
+                val plugin = BetterSocketPlugin()
+                val channel = MethodChannel(registrar.messenger(), "better_socket" + index.toString())
+                channel.setMethodCallHandler(plugin)
 
-            //注册WebSocket Flutter回调
-            EventChannel(registrar.messenger(), "better_socket0/event").setStreamHandler(object : EventChannel.StreamHandler {
-                override fun onListen(p0: Any?, sink: EventChannel.EventSink?) {
-                    plugin.queuingEventSink.setDelegate(sink)
-                }
+                //注册WebSocket Flutter回调
+                EventChannel(registrar.messenger(), "better_socket/event" + index.toString()).setStreamHandler(object : EventChannel.StreamHandler {
+                    override fun onListen(p0: Any?, sink: EventChannel.EventSink?) {
+                        plugin.queuingEventSink.setDelegate(sink)
+                    }
 
-                override fun onCancel(p0: Any?) {
-                    plugin.queuingEventSink.setDelegate(null)
-                }
-            })
+                    override fun onCancel(p0: Any?) {
+                        plugin.queuingEventSink.setDelegate(null)
+                    }
+                })
 
+            }
 
-
-            val plugin1 = BetterSocketPluginOne()
-            val channel1 = MethodChannel(registrar.messenger(), "better_socket1")
-            channel1.setMethodCallHandler(plugin1)
-            //注册WebSocket Flutter回调
-            EventChannel(registrar.messenger(), "better_socket1/event").setStreamHandler(object : EventChannel.StreamHandler {
-                override fun onListen(p0: Any?, sink: EventChannel.EventSink?) {
-                    plugin1.queuingEventSink.setDelegate(sink)
-                }
-                override fun onCancel(p0: Any?) {
-                    plugin1.queuingEventSink.setDelegate(null)
-                }
-            })
-
-
-            val plugin2 = BetterSocketPluginTwo()
-            val channel2 = MethodChannel(registrar.messenger(), "better_socket2")
-            channel2.setMethodCallHandler(plugin2)
-            //注册WebSocket Flutter回调
-            EventChannel(registrar.messenger(), "better_socket2/event").setStreamHandler(object : EventChannel.StreamHandler {
-                override fun onListen(p0: Any?, sink: EventChannel.EventSink?) {
-                    plugin2.queuingEventSink.setDelegate(sink)
-                }
-                override fun onCancel(p0: Any?) {
-                    plugin2.queuingEventSink.setDelegate(null)
-                }
-            })
-
-
-            val plugin3 = BetterSocketPluginThree()
-            val channel3 = MethodChannel(registrar.messenger(), "better_socket3")
-            channel3.setMethodCallHandler(plugin3)
-            //注册WebSocket Flutter回调
-            EventChannel(registrar.messenger(), "better_socket3/event").setStreamHandler(object : EventChannel.StreamHandler {
-                override fun onListen(p0: Any?, sink: EventChannel.EventSink?) {
-                    plugin3.queuingEventSink.setDelegate(sink)
-                }
-                override fun onCancel(p0: Any?) {
-                    plugin3.queuingEventSink.setDelegate(null)
-                }
-            })
-
-
-
-            val plugin4 = BetterSocketPluginFour()
-            val channel4 = MethodChannel(registrar.messenger(), "better_socket4")
-            channel4.setMethodCallHandler(plugin4)
-            //注册WebSocket Flutter回调
-            EventChannel(registrar.messenger(), "better_socket4/event").setStreamHandler(object : EventChannel.StreamHandler {
-                override fun onListen(p0: Any?, sink: EventChannel.EventSink?) {
-                    plugin4.queuingEventSink.setDelegate(sink)
-                }
-                override fun onCancel(p0: Any?) {
-                    plugin4.queuingEventSink.setDelegate(null)
-                }
-            })
         }
     }
 
@@ -107,191 +54,6 @@ class BetterSocketPlugin() : MethodCallHandler {
                 val msg = call.argument<String>("msg")
                 if (betterWebSocketClient?.isOpen == true)
                         betterWebSocketClient?.send(msg)
-                result.success(null)
-            }
-            call.method == "sendByteMsg" -> {
-                val msg = call.argument<ByteArray>("msg")
-                if (betterWebSocketClient?.isOpen == true)
-                    betterWebSocketClient?.send(msg)
-                result.success(null)
-            }
-            call.method == "close" -> {
-                close()
-                result.success(null)
-            }
-            else -> result.notImplemented()
-        }
-    }
-
-    private fun close() {
-        if (betterWebSocketClient?.isOpen == true) {
-            betterWebSocketClient?.close()
-        }
-        betterWebSocketClient = null
-    }
-
-}
-
-
-class BetterSocketPluginOne() : MethodCallHandler {
-    private var betterWebSocketClient: BetterWebSocketClient? = null
-    public val queuingEventSink: QueuingEventSink = QueuingEventSink()
-
-
-    override fun onMethodCall(call: MethodCall, result: Result) {
-        when {
-            call.method == "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
-            call.method == "connentSocket" -> {
-                val path = call.argument<String>("path")
-                val httpHeaders = call.argument<Map<String, String>>("httpHeaders")
-                val webSocketUri = URI.create(path)
-                close()
-                betterWebSocketClient = BetterWebSocketClient(webSocketUri, queuingEventSink, httpHeaders = httpHeaders)
-                betterWebSocketClient?.connect()
-                result.success(null)
-            }
-            call.method == "sendMsg" -> {
-                val msg = call.argument<String>("msg")
-                if (betterWebSocketClient?.isOpen == true)
-                    betterWebSocketClient?.send(msg)
-                result.success(null)
-            }
-            call.method == "sendByteMsg" -> {
-                val msg = call.argument<ByteArray>("msg")
-                if (betterWebSocketClient?.isOpen == true)
-                    betterWebSocketClient?.send(msg)
-                result.success(null)
-            }
-            call.method == "close" -> {
-                close()
-                result.success(null)
-            }
-            else -> result.notImplemented()
-        }
-    }
-
-    private fun close() {
-        if (betterWebSocketClient?.isOpen == true) {
-            betterWebSocketClient?.close()
-        }
-        betterWebSocketClient = null
-    }
-
-}
-
-class BetterSocketPluginTwo() : MethodCallHandler {
-    private var betterWebSocketClient: BetterWebSocketClient? = null
-    public val queuingEventSink: QueuingEventSink = QueuingEventSink()
-
-
-    override fun onMethodCall(call: MethodCall, result: Result) {
-        when {
-            call.method == "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
-            call.method == "connentSocket" -> {
-                val path = call.argument<String>("path")
-                val httpHeaders = call.argument<Map<String, String>>("httpHeaders")
-                val webSocketUri = URI.create(path)
-                close()
-                betterWebSocketClient = BetterWebSocketClient(webSocketUri, queuingEventSink, httpHeaders = httpHeaders)
-                betterWebSocketClient?.connect()
-                result.success(null)
-            }
-            call.method == "sendMsg" -> {
-                val msg = call.argument<String>("msg")
-                if (betterWebSocketClient?.isOpen == true)
-                    betterWebSocketClient?.send(msg)
-                result.success(null)
-            }
-            call.method == "sendByteMsg" -> {
-                val msg = call.argument<ByteArray>("msg")
-                if (betterWebSocketClient?.isOpen == true)
-                    betterWebSocketClient?.send(msg)
-                result.success(null)
-            }
-            call.method == "close" -> {
-                close()
-                result.success(null)
-            }
-            else -> result.notImplemented()
-        }
-    }
-
-    private fun close() {
-        if (betterWebSocketClient?.isOpen == true) {
-            betterWebSocketClient?.close()
-        }
-        betterWebSocketClient = null
-    }
-
-}
-
-class BetterSocketPluginThree() : MethodCallHandler {
-    private var betterWebSocketClient: BetterWebSocketClient? = null
-    public val queuingEventSink: QueuingEventSink = QueuingEventSink()
-
-
-    override fun onMethodCall(call: MethodCall, result: Result) {
-        when {
-            call.method == "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
-            call.method == "connentSocket" -> {
-                val path = call.argument<String>("path")
-                val httpHeaders = call.argument<Map<String, String>>("httpHeaders")
-                val webSocketUri = URI.create(path)
-                close()
-                betterWebSocketClient = BetterWebSocketClient(webSocketUri, queuingEventSink, httpHeaders = httpHeaders)
-                betterWebSocketClient?.connect()
-                result.success(null)
-            }
-            call.method == "sendMsg" -> {
-                val msg = call.argument<String>("msg")
-                if (betterWebSocketClient?.isOpen == true)
-                    betterWebSocketClient?.send(msg)
-                result.success(null)
-            }
-            call.method == "sendByteMsg" -> {
-                val msg = call.argument<ByteArray>("msg")
-                if (betterWebSocketClient?.isOpen == true)
-                    betterWebSocketClient?.send(msg)
-                result.success(null)
-            }
-            call.method == "close" -> {
-                close()
-                result.success(null)
-            }
-            else -> result.notImplemented()
-        }
-    }
-
-    private fun close() {
-        if (betterWebSocketClient?.isOpen == true) {
-            betterWebSocketClient?.close()
-        }
-        betterWebSocketClient = null
-    }
-
-}
-
-class BetterSocketPluginFour() : MethodCallHandler {
-    private var betterWebSocketClient: BetterWebSocketClient? = null
-    public val queuingEventSink: QueuingEventSink = QueuingEventSink()
-
-
-    override fun onMethodCall(call: MethodCall, result: Result) {
-        when {
-            call.method == "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
-            call.method == "connentSocket" -> {
-                val path = call.argument<String>("path")
-                val httpHeaders = call.argument<Map<String, String>>("httpHeaders")
-                val webSocketUri = URI.create(path)
-                close()
-                betterWebSocketClient = BetterWebSocketClient(webSocketUri, queuingEventSink, httpHeaders = httpHeaders)
-                betterWebSocketClient?.connect()
-                result.success(null)
-            }
-            call.method == "sendMsg" -> {
-                val msg = call.argument<String>("msg")
-                if (betterWebSocketClient?.isOpen == true)
-                    betterWebSocketClient?.send(msg)
                 result.success(null)
             }
             call.method == "sendByteMsg" -> {

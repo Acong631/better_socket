@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:better_socket/better_socket.dart';
+
 // import 'dart:convert' show utf8;
 
 void main() => runApp(MyApp());
@@ -27,24 +27,24 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await BetterSocket.platformVersion;
+      // platformVersion = await BetterSocket.platformVersion;
 
       //设置监听
-      BetterSocket.addListener(onOpen: (httpStatus, httpStatusMessage) {
-        print("onOpen---httpStatus:$httpStatus  httpStatusMessage:$httpStatusMessage");
+      // BetterSocket.addListener(onOpen: (httpStatus, httpStatusMessage) {
+      //   print("onOpen---httpStatus:$httpStatus  httpStatusMessage:$httpStatusMessage");
         
-        BetterSocket.sendByteMsg(Utf8Encoder().convert('hello'));
-        // BetterSocket.sendMsg('hello');
-      }, onMessage: (message) {
-        print("onMessage---message:$message");
-      }, onClose: (code, reason, remote) {
-        print("onClose---code:$code  reason:$reason  remote:$remote");
-      }, onError: (message) {
-        print("onError---message:$message");
-      });
-      var headers = {"origin": "ws://echo.websocket.org"};
+      //   BetterSocket.sendByteMsg(Utf8Encoder().convert('hello'));
+      //   // BetterSocket.sendMsg('hello');
+      // }, onMessage: (message) {
+      //   print("onMessage---message:$message");
+      // }, onClose: (code, reason, remote) {
+      //   print("onClose---code:$code  reason:$reason  remote:$remote");
+      // }, onError: (message) {
+      //   print("onError---message:$message");
+      // });
+      // var headers = {"origin": "ws://echo.websocket.org"};
 
-      BetterSocket.connentSocket("ws://echo.websocket.org", httpHeaders: headers);
+      // BetterSocket.connentSocket("ws://echo.websocket.org", httpHeaders: headers);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
-    BetterSocket.close();
+    // BetterSocket.close();
     super.dispose();
   }
 }
